@@ -167,34 +167,50 @@ const bankSoal = {
             { q: "إِنَّ الْإِنسَانَ لِرَبِّهِ لَكَنُودٌ", a: ["وَإِنَّهُ لِحُبِّ الْخَيْرِ", "وَإِنَّهُ عَلَىٰ ذَٰلِكَ لَشَهِيدٌ", "أَفَلَا يَعْلَمُ"], c: 1 },
             { q: "وَمَا أَدْرَاكَ مَا لَيْلَةُ ...", a: ["الْقَارِعَةُ", "الْفَجْرِ", "الْقَدْرِ"], c: 2 }
         ]
+    },
+    bahasaarab: {
+        anak: [
+            {q: "Apa bahasa Arabnya 'Mata'?", a: ["Ainun (عَيْنٌ)", "Anfun (أَنْفٌ)", "Udunun", "Yadun"], c: 0},
+            {q: "Apa bahasa Arabnya 'Buku'?", a: ["Qolamun", "Kitabun (كِتَابٌ)", "Maktabun", "Kursiyyun"], c: 1},
+            {q: "Apa arti dari kata 'Abun (أَبٌ)'?", a: ["Ibu", "Kakak", "Ayah", "Paman"], c: 2},
+            {q: "Warna 'Putih' adalah...", a: ["Aswad", "Ahmar", "Abhyadh (أَبْيَضُ)", "Akhdhor"], c: 2},
+            {q: "Apa bahasa Arabnya 'Tangan'?", a: ["Rijlun", "Yadun (يَدٌ)", "Rosun", "Sodrun"], c: 1},
+            {q: "Apa bahasa Arabnya 'Sekolah'?", a: ["Madrasatun (مَدْرَسَةٌ)", "Baitun", "Masjidun", "Suuqun"], c: 0},
+            {q: "Apa arti dari 'Labanun (لَبَنٌ)'?", a: ["Air", "Susu", "Teh", "Kopi"], c: 1},
+            {q: "Apa bahasa Arabnya 'Kucing'?", a: ["Filun", "Thoirun", "Qit-thun (قِطٌّ)", "Assadun"], c: 2},
+            {q: "Apa arti dari 'Tilmiidzun (تِلْمِيْذٌ)'?", a: ["Guru", "Murid", "Dokter", "Polisi"], c: 1},
+            {q: "Bahasa Arabnya angka 'Satu' adalah...", a: ["Wahid (وَاحِدٌ)", "Itsnan", "Tsalatsah", "Arba'ah"], c: 0}
+        ],
+        dewasa: [
+            {q: "Apa bahasa Arabnya 'Jantung'?", a: ["Qolbun (قَلْبٌ)", "Kabidun", "Riatun", "Midadun"], c: 0},
+            {q: "Arti dari 'Al-Mustasyfa (الْمُسْتَشْفَى)' adalah...", a: ["Sekolah", "Pasar", "Rumah Sakit", "Bandara"], c: 2},
+            {q: "Apa bahasa Arabnya 'Kipas Angin'?", a: ["Mikhsholun", "Mirwahatun (مِرْوَحَةٌ)", "Mishbahun", "Mimsahatun"], c: 1},
+            {q: "Apa arti 'As-Sayyaratu' (السَّيَّارَةُ)?", a: ["Sepeda", "Motor", "Mobil", "Pesawat"], c: 2},
+            {q: "Apa bahasa Arabnya 'Kepala'?", a: ["Anfun", "Ro'sun (رَأْسٌ)", "Lisanun", "Sinnun"], c: 1},
+            {q: "Apa arti dari kata 'Muhandisun (مُهَنْدِسٌ)'?", a: ["Petani", "Nelayan", "Arsitek", "Pilot"], c: 2},
+            {q: "Bahasa Arab dari arah 'Timur' adalah...", a: ["Syamal", "Janub", "Syarqun (شَرْقٌ)", "Ghorbun"], c: 2},
+            {q: "Apa arti 'Hujratun (حُجْرَةٌ)'?", a: ["Dapur", "Kamar/Ruangan", "Halaman", "Atap"], c: 1},
+            {q: "Bahasa Arabnya 'Kamus' adalah...", a: ["Majallatun", "Jaridatun", "Qomus (قَامُوْسٌ)", "Khariitotun"], c: 2},
+            {q: "Apa arti dari 'Saa'atun (سَاعَةٌ)'?", a: ["Jam/Waktu", "Meja", "Pintu", "Jendela"], c: 0}
+        ]
     }
 };
-
-// --- LOGIKA PERMAINAN ---
 
 function selectCategory(cat) {
     currentCategory = cat;
     document.getElementById('menu-screen').classList.add('hidden');
     document.getElementById('setup-screen').classList.remove('hidden');
-    let displayTitle = cat === 'sambungayat' ? "SAMBUNG AYAT" : cat.toUpperCase();
-    document.getElementById('cat-display').innerText = "Kategori: " + displayTitle;
+    let titles = {'sejarah':'SEJARAH','fikih':'FIKIH','juzamma':'JUZ AMMA','sambungayat':'SAMBUNG AYAT','bahasaarab':'BAHASA ARAB'};
+    document.getElementById('cat-display').innerText = "Kategori: " + (titles[cat] || cat.toUpperCase());
 }
 
 function startGame() {
     let limitInput = parseInt(document.getElementById('limit-input').value) || 10;
     let selectedLevel = document.querySelector('input[name="level"]:checked').value;
-    
     let source = bankSoal[currentCategory][selectedLevel];
-    if (!source || source.length === 0) {
-        alert("Soal belum tersedia untuk kategori ini.");
-        return;
-    }
-
-    curIdx = 0;
-    score = 0;
-    document.getElementById('score-val').innerText = score;
     
-    // Acak soal dan ambil sesuai limit (maksimal 20)
+    curIdx = 0; score = 0;
+    document.getElementById('score-val').innerText = score;
     let limit = Math.min(limitInput, source.length);
     activeQuestions = [...source].sort(() => Math.random() - 0.5).slice(0, limit);
     
@@ -206,21 +222,18 @@ function startGame() {
 
 function loadQuestion() {
     let q = activeQuestions[curIdx];
-    let qTextElement = document.getElementById('q-text');
-    
+    let qElement = document.getElementById('q-text');
     document.getElementById('current-num').innerText = curIdx + 1;
-    qTextElement.innerText = q.q;
+    qElement.innerText = q.q;
     document.getElementById('result-msg').innerText = "";
     
-    // Styling khusus Arab untuk Sambung Ayat
+    // Tampilan Khusus Arab
     if(currentCategory === 'sambungayat') {
-        qTextElement.style.direction = "rtl";
-        qTextElement.style.fontSize = "2rem";
-        qTextElement.style.textAlign = "right";
+        qElement.style.fontSize = "2.2rem";
+        qElement.style.direction = "rtl";
     } else {
-        qTextElement.style.direction = "ltr";
-        qTextElement.style.fontSize = "1.2rem";
-        qTextElement.style.textAlign = "center";
+        qElement.style.fontSize = "1.4rem";
+        qElement.style.direction = "ltr";
     }
 
     let box = document.getElementById('options-box');
@@ -229,11 +242,6 @@ function loadQuestion() {
         let btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.innerText = opt;
-        if(currentCategory === 'sambungayat') {
-            btn.style.direction = "rtl";
-            btn.style.textAlign = "right";
-            btn.style.fontSize = "1.2rem";
-        }
         btn.onclick = () => checkAnswer(idx);
         box.appendChild(btn);
     });
@@ -248,10 +256,10 @@ function checkAnswer(idx) {
         score++;
         document.getElementById('score-val').innerText = score;
         document.getElementById('result-msg').innerHTML = "<span style='color:green'>✅ Benar! Masya Allah</span>";
-        if(document.getElementById('snd-right')) document.getElementById('snd-right').play();
+        document.getElementById('snd-right').play();
     } else {
         document.getElementById('result-msg').innerHTML = "<span style='color:red'>❌ Kurang Tepat!</span>";
-        if(document.getElementById('snd-wrong')) document.getElementById('snd-wrong').play();
+        document.getElementById('snd-wrong').play();
     }
 
     setTimeout(() => {
@@ -265,12 +273,6 @@ function showFinal() {
     document.getElementById('game-screen').classList.add('hidden');
     document.getElementById('end-screen').classList.remove('hidden');
     document.getElementById('final-score').innerText = score;
-    
     let ratio = score / activeQuestions.length;
-    let msg = "";
-    if(ratio === 1) msg = "Sempurna! Hafalanmu luar biasa.";
-    else if(ratio >= 0.7) msg = "Bagus! Terus muraja'ah ya.";
-    else msg = "Semangat! Perbanyak lagi hafalannya.";
-    
-    document.getElementById('final-msg').innerText = msg;
+    document.getElementById('final-msg').innerText = ratio === 1 ? "Mumtaz!" : "Semangat!";
 }
