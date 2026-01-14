@@ -142,79 +142,62 @@ const bankSoal = {
             {q: "Tattwir artinya...", a: ["Menggulung", "Belah", "Hancur", "Gelap"], c: 0}
         ]
     },
-    gambar: {
+    sambungayat: {
         anak: [
-            {q: "Gambar apakah ini?", img: "https://cdn.pixabay.com/photo/2017/01/29/13/11/kaaba-2017983_1280.jpg", a: ["Rumah", "Ka'bah", "Masjid", "Tugu"], c: 1},
-            {q: "Dzikir pakai benda ini, namanya?", img: "https://cdn.pixabay.com/photo/2017/08/02/16/09/tasbih-2572244_1280.jpg", a: ["Mainan", "Tasbih", "Kalung", "Gelang"], c: 1},
-            {q: "Ini kitab suci kita, namanya?", img: "https://cdn.pixabay.com/photo/2017/04/05/22/02/quran-2206514_1280.jpg", a: ["Buku", "Al-Qur'an", "Koran", "Majalah"], c: 1},
-            {q: "Nabi terakhir...", a: ["Adam", "Muhammad SAW", "Musa", "Isa"], c: 1},
-            {q: "Shalat ... kali sehari.", a: ["3", "4", "5", "6"], c: 2},
-            {q: "Posisi ini disebut...", img: "https://cdn.pixabay.com/photo/2015/07/13/11/56/muslim-843076_1280.jpg", a: ["Sujud", "Rukuk", "Berdiri", "Duduk"], c: 0},
-            {q: "Masjid Nabawi di...", a: ["Makkah", "Madinah", "Yaman", "Turki"], c: 1},
-            {q: "Rukun Islam ada...", a: ["4", "5", "6", "10"], c: 1},
-            {q: "Setelah puasa kita lebaran...", a: ["Idul Fitri", "Idul Adha", "Tahun Baru", "Maulid"], c: 0},
-            {q: "Ibadah di masjid adalah...", a: ["Makan", "Shalat", "Tidur", "Main"], c: 1},
-            {q: "Sahur dilakukan waktu...", a: ["Pagi sekali", "Siang", "Sore", "Malam"], c: 0},
-            {q: "Quran surat Al-Fil tentang...", a: ["Gajah", "Burung", "Kucing", "Semut"], c: 0},
-            {q: "Siapa pencipta kita?", a: ["Manusia", "Allah", "Malaikat", "Nabi"], c: 1},
-            {q: "Lawan dari jujur adalah...", a: ["Baik", "Bohong", "Sabar", "Pintar"], c: 1},
-            {q: "Malaikat Jibril bawa...", a: ["Wahyu", "Hujan", "Rezeki", "Maut"], c: 0},
-            {q: "Hukum curi barang teman...", a: ["Boleh", "Dosa/Haram", "Pahala", "Hebat"], c: 1},
-            {q: "Surah Al-Ikhlas ada ... ayat.", a: ["3", "4", "5", "6"], c: 1},
-            {q: "Ibu Nabi Muhammad...", a: ["Aminah", "Khadijah", "Aisyah", "Halimah"], c: 0},
-            {q: "Kita baca ... sebelum makan.", a: ["Puisi", "Doa", "Koran", "Majalah"], c: 1},
-            {q: "Wudhu cuci muka ... kali.", a: ["1", "2", "3", "10"], c: 2}
+            { q: "قُلْ هُوَ اللَّهُ أَحَدٌ", a: ["اللَّهُ الصَّمَدُ", "لَمْ يَلِدْ وَلَمْ يُولَدْ", "وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ"], c: 0 },
+            { q: "إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ", a: ["فَسَبِّحْ بِحَمْدِ رَبِّكَ", "وَرَأَيْتَ النَّاسَ يَدْخُلُونَ", "إِنَّهُ كَانَ تَوَّابًا"], c: 1 },
+            { q: "أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ", a: ["فَوَيْلٌ لِّلْمُصَلِّينَ", "وَلَا يَحُضُّ عَلَىٰ طَعَامِ", "فَذَٰلِكَ الَّذِي يَدُعُّ الْيَتِيمَ"], c: 2 },
+            { q: "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ", a: ["فَصَلِّ لِرَبِّكَ وَانْحَرْ", "إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ", "لِيَعْبُدُوا رَبَّ هَٰذَا"], c: 0 },
+            { q: "لِيَعْبُدُوا رَبَّ هَٰذَا الْبَيْتِ", a: ["إِيلَافِهِمْ رِحْلَةَ الشِّتَاءِ", "الَّذِي أَطْعَمَهُم مِّن جُوعٍ", "لِإِيلَافِ قُرَيْشٍ"], c: 1 },
+            { q: "وَمِن شَرِّ غَاسِقٍ إِذَا ...", a: ["وَقَبَ", "حَسَدَ", "نَفَثَ"], c: 0 },
+            { q: "إِذَا زُلْزِلَتِ الْأَرْضُ ...", a: ["أَثْقَالَهَا", "زِلْزَالَهَا", "أَخْبَارَهَا"], c: 1 },
+            { q: "تَبَّتْ يَدَا أَبِي لَهَبٍ ...", a: ["مَا أَغْنَىٰ عَنْهُ", "سَيَصْلَىٰ نَارًا", "وَتَبَّ"], c: 2 },
+            { q: "فِي جِيدِهَا حَبْلٌ مِّن ...", a: ["حَطَبٍ", "مَّسَدٍ", "لَهَبٍ"], c: 1 },
+            { q: "أَلَمْ يَجْعَلْ كَيْدَهُمْ فِي ...", a: ["تَضْلِيلٍ", "سِجِّيلٍ", "أَبَابِيلَ"], c: 0 }
         ],
         dewasa: [
-            {q: "Tempat wukuf haji adalah...", img: "https://cdn.pixabay.com/photo/2016/02/19/11/47/mount-arafat-1209939_1280.jpg", a: ["Uhud", "Arafah", "Nur", "Tsur"], c: 1},
-            {q: "Kubah emas di Palestina...", img: "https://cdn.pixabay.com/photo/2018/11/14/20/06/jerusalem-3815962_1280.jpg", a: ["Dome of the Rock", "Nabawi", "Quba", "Masjid Haram"], c: 0},
-            {q: "Nabi menerima wahyu pertama di...", img: "https://cdn.pixabay.com/photo/2019/08/21/05/29/mountain-4420235_1280.jpg", a: ["Goa Tsur", "Goa Hira", "Masjid", "Rumah Khadijah"], c: 1},
-            {q: "Berapa rakaat shalat fardhu sehari?", a: ["15", "17", "20", "12"], c: 1},
-            {q: "Pakaian haji pria...", a: ["Ihram", "Jubah", "Koko", "Sarung"], c: 0},
-            {q: "Mata air Makkah...", a: ["Nil", "Zamzam", "Euphrat", "Kautsar"], c: 1},
-            {q: "Hukum khamr...", a: ["Halal", "Haram", "Makruh", "Mubah"], c: 1},
-            {q: "Nishab emas...", a: ["85 gr", "100 gr", "50 gr", "200 gr"], c: 0},
-            {q: "Shalat Jumat hukumnya...", a: ["Wajib bagi pria", "Sunnah", "Mubah", "Makruh"], c: 0},
-            {q: "Malaikat peniup sangkakala...", a: ["Jibril", "Israfil", "Mikail", "Izrail"], c: 1},
-            {q: "Rukun iman ke-5...", a: ["Malaikat", "Kiamat", "Kitab", "Nabi"], c: 1},
-            {q: "Thawaf keliling Ka'bah ... kali.", a: ["3", "5", "7", "10"], c: 2},
-            {q: "Surah Al-Alaq tentang...", a: ["Wahyu 1", "Zakat", "Haji", "Puasa"], c: 0},
-            {q: "Zakat fitrah dibayar saat...", a: ["Ramadhan", "Syawal", "Haji", "Maulid"], c: 0},
-            {q: "Ibadah haji rukun Islam ke...", a: ["3", "4", "5", "2"], c: 2},
-            {q: "Nabi Muhammad wafat usia...", a: ["60", "63", "65", "70"], c: 1},
-            {q: "Kitab Nabi Isa...", a: ["Taurat", "Zabur", "Injil", "Quran"], c: 2},
-            {q: "Gelar Abu Bakar...", a: ["Al-Faruq", "Ash-Shiddiq", "Dzun Nurain", "Saifullah"], c: 1},
-            {q: "Puasa wajib bulan...", a: ["Rajab", "Ramadhan", "Syawal", "Sya'ban"], c: 1},
-            {q: "Aurat wanita kecuali...", a: ["Kaki", "Wajah & Telapak", "Rambut", "Leher"], c: 1}
+            { q: "عَمَّ يَتَسَاءَلُونَ", a: ["عَنِ النَّبَإِ الْعَظِيمِ", "الَّذِي هُمْ فِيهِ مُخْتَلِفُونَ", "كَلَّا سَيَعْلَمُونَ"], c: 0 },
+            { q: "وَالتِّينِ وَالزَّيْتُونِ", a: ["وَهَٰذَا الْبَلَدِ الْأَمِينِ", "وَطُورِ سِينِينَ", "لَقَدْ خَلَقْنَا الْإِنسَانَ"], c: 1 },
+            { q: "أَلَمْ نَشْرَحْ لَكَ ...", a: ["وِزْرَكَ", "ذِكْرَكَ", "صَدْرَكَ"], c: 2 },
+            { q: "إِذَا السَّمَاءُ انشَقَّتْ", a: ["وَأَذِنَتْ لِرَبِّهَا وَحُقَّتْ", "وَإِذَا الْأَرْضُ مُدَّتْ", "وَأَلْقَتْ مَا فِيهَا"], c: 0 },
+            { q: "وَالسَّمَاءِ وَالطَّارِقِ", a: ["النَّجْمُ الثَّاقِبُ", "وَمَا أَدْرَاكَ مَا الطَّارِقُ", "إِن كُلُّ نَفْسٍ لَّمَّا"], c: 1 },
+            { q: "سَبِّحِ اسْمَ رَبِّكَ الْأَعْلَى", a: ["الَّذِي خَلَقَ فَسَوَّىٰ", "وَالَّذِي قَدَّرَ فَهَدَىٰ", "فَجَعَلَهُ غُثَاءً"], c: 0 },
+            { q: "لَا أُقْسِمُ بِهَٰذَا الْبَلَدِ", a: ["وَوَالِدٍ وَمَا وَلَدَ", "لَقَدْ خَلَقْنَا الْإِنسَانَ", "وَأَنتَ حِلٌّ بِهَٰذَا الْبَلَدِ"], c: 2 },
+            { q: "وَالشَّمْسِ وَضُحَاهَا", a: ["وَالْقَمَرِ إِذَا تَلَاهَا", "وَالنَّهارِ إِذَا جَلَّاهَا", "وَاللَّيْلِ إِذَا يَغْشَاهَا"], c: 0 },
+            { q: "إِنَّ الْإِنسَانَ لِرَبِّهِ لَكَنُودٌ", a: ["وَإِنَّهُ لِحُبِّ الْخَيْرِ", "وَإِنَّهُ عَلَىٰ ذَٰلِكَ لَشَهِيدٌ", "أَفَلَا يَعْلَمُ"], c: 1 },
+            { q: "وَمَا أَدْرَاكَ مَا لَيْلَةُ ...", a: ["الْقَارِعَةُ", "الْفَجْرِ", "الْقَدْرِ"], c: 2 }
         ]
     }
 };
+
+// --- LOGIKA PERMAINAN ---
 
 function selectCategory(cat) {
     currentCategory = cat;
     document.getElementById('menu-screen').classList.add('hidden');
     document.getElementById('setup-screen').classList.remove('hidden');
-    document.getElementById('cat-display').innerText = "Kategori: " + cat.toUpperCase();
+    let displayTitle = cat === 'sambungayat' ? "SAMBUNG AYAT" : cat.toUpperCase();
+    document.getElementById('cat-display').innerText = "Kategori: " + displayTitle;
 }
 
 function startGame() {
     let limitInput = parseInt(document.getElementById('limit-input').value) || 10;
-    // Mengambil level yang dipilih dari radio button
-    let levelElement = document.querySelector('input[name="level"]:checked');
-    let selectedLevel = levelElement.value;
+    let selectedLevel = document.querySelector('input[name="level"]:checked').value;
     
-    // Ambil data soal
     let source = bankSoal[currentCategory][selectedLevel];
-    
+    if (!source || source.length === 0) {
+        alert("Soal belum tersedia untuk kategori ini.");
+        return;
+    }
+
     curIdx = 0;
     score = 0;
     document.getElementById('score-val').innerText = score;
     
-    // Acak soal
+    // Acak soal dan ambil sesuai limit (maksimal 20)
     let limit = Math.min(limitInput, source.length);
     activeQuestions = [...source].sort(() => Math.random() - 0.5).slice(0, limit);
     
-    // Tampilkan layar game
     document.getElementById('setup-screen').classList.add('hidden');
     document.getElementById('game-screen').classList.remove('hidden');
     document.getElementById('total-num').innerText = activeQuestions.length;
@@ -223,16 +206,21 @@ function startGame() {
 
 function loadQuestion() {
     let q = activeQuestions[curIdx];
+    let qTextElement = document.getElementById('q-text');
+    
     document.getElementById('current-num').innerText = curIdx + 1;
-    document.getElementById('q-text').innerText = q.q;
+    qTextElement.innerText = q.q;
     document.getElementById('result-msg').innerText = "";
     
-    let imgCont = document.getElementById('image-container');
-    if(q.img) {
-        document.getElementById('q-img').src = q.img;
-        imgCont.classList.remove('hidden');
+    // Styling khusus Arab untuk Sambung Ayat
+    if(currentCategory === 'sambungayat') {
+        qTextElement.style.direction = "rtl";
+        qTextElement.style.fontSize = "2rem";
+        qTextElement.style.textAlign = "right";
     } else {
-        imgCont.classList.add('hidden');
+        qTextElement.style.direction = "ltr";
+        qTextElement.style.fontSize = "1.2rem";
+        qTextElement.style.textAlign = "center";
     }
 
     let box = document.getElementById('options-box');
@@ -241,6 +229,11 @@ function loadQuestion() {
         let btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.innerText = opt;
+        if(currentCategory === 'sambungayat') {
+            btn.style.direction = "rtl";
+            btn.style.textAlign = "right";
+            btn.style.fontSize = "1.2rem";
+        }
         btn.onclick = () => checkAnswer(idx);
         box.appendChild(btn);
     });
@@ -255,17 +248,17 @@ function checkAnswer(idx) {
         score++;
         document.getElementById('score-val').innerText = score;
         document.getElementById('result-msg').innerHTML = "<span style='color:green'>✅ Benar! Masya Allah</span>";
-        document.getElementById('snd-right').play();
+        if(document.getElementById('snd-right')) document.getElementById('snd-right').play();
     } else {
         document.getElementById('result-msg').innerHTML = "<span style='color:red'>❌ Kurang Tepat!</span>";
-        document.getElementById('snd-wrong').play();
+        if(document.getElementById('snd-wrong')) document.getElementById('snd-wrong').play();
     }
 
     setTimeout(() => {
         curIdx++;
         if(curIdx < activeQuestions.length) loadQuestion();
         else showFinal();
-    }, 1200);
+    }, 1500);
 }
 
 function showFinal() {
@@ -274,6 +267,10 @@ function showFinal() {
     document.getElementById('final-score').innerText = score;
     
     let ratio = score / activeQuestions.length;
-    let msg = ratio === 1 ? "Sempurna! Kamu cerdas sekali." : (ratio >= 0.7 ? "Bagus! Terus tingkatkan." : "Ayo belajar lagi!");
+    let msg = "";
+    if(ratio === 1) msg = "Sempurna! Hafalanmu luar biasa.";
+    else if(ratio >= 0.7) msg = "Bagus! Terus muraja'ah ya.";
+    else msg = "Semangat! Perbanyak lagi hafalannya.";
+    
     document.getElementById('final-msg').innerText = msg;
 }
