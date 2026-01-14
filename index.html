@@ -4,179 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kuis Agama Tirmizi</title>
-    <style>
-        :root { --primary: #1b5e20; --secondary: #4caf50; --error: #d32f2f; --bg: #f1f8e9; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .container { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); width: 90%; max-width: 550px; text-align: center; }
-        .menu-btn { width: 100%; padding: 16px; margin: 12px 0; border: none; border-radius: 15px; cursor: pointer; font-size: 1.1rem; font-weight: bold; color: white; transition: 0.3s; transform: scale(1); }
-        .menu-btn:active { transform: scale(0.98); }
-        .btn-teks { background: #2e7d32; }
-        .btn-gambar { background: #1565c0; }
-        .option-btn { width: 100%; padding: 14px; margin: 8px 0; border: 2px solid #e0e0e0; border-radius: 12px; background: white; cursor: pointer; font-size: 1rem; text-align: left; transition: 0.2s; }
-        .option-btn:hover:not([disabled]) { border-color: var(--secondary); background: #f1f8e9; }
-        .quiz-img { width: 100%; height: 250px; object-fit: cover; border-radius: 15px; margin-bottom: 20px; border: 5px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .hidden { display: none; }
-        #result-msg { font-weight: bold; margin: 15px 0; font-size: 1.2rem; min-height: 1.5em; }
-        input[type="number"] { padding: 12px; width: 100px; text-align: center; border-radius: 10px; border: 2px solid #ddd; font-size: 1.1rem; margin: 10px; }
-        .header-title { color: var(--primary); font-size: 2rem; margin-bottom: 5px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
     <div id="menu-screen">
         <h1 class="header-title">Kuis Agama Tirmizi</h1>
-        <p style="color: #666;">Pelajari Sejarah & Fiqih dengan Menyenangkan</p>
-        <button class="menu-btn btn-teks" onclick="selectMode('teks')">📖 Kuis Teks (Sejarah & Fiqih)</button>
-        <button class="menu-btn btn-gambar" onclick="selectMode('gambar')">🖼️ Tebak Gambar Islami</button>
+        <p class="subtitle">Silahkan Pilih Kategori:</p>
+        <div class="category-grid">
+            <button class="cat-btn" onclick="selectCategory('sejarah')">📜 Sejarah</button>
+            <button class="cat-btn" onclick="selectCategory('fikih')">⚖️ Fikih</button>
+            <button class="cat-btn" onclick="selectCategory('juzamma')">📖 Juz Amma</button>
+            <button class="cat-btn image-mode" onclick="selectCategory('gambar')">🖼️ Gambar</button>
+        </div>
     </div>
 
     <div id="setup-screen" class="hidden">
-        <h2 id="mode-title">Pengaturan</h2>
-        <p>Berapa banyak soal yang ingin kamu jawab?</p>
-        <input type="number" id="limit-input" value="10" min="1" max="50">
-        <button class="menu-btn btn-teks" style="background: var(--primary);" onclick="startGame()">Mulai Sekarang</button>
+        <h2 id="cat-display">Kategori</h2>
+        <div class="card-box">
+            <p><strong>Pilih Tingkat Kesulitan:</strong></p>
+            <div class="level-box">
+                <label class="level-label">
+                    <input type="radio" name="level" value="anak" checked> 🧒 Anak
+                </label>
+                <label class="level-label">
+                    <input type="radio" name="level" value="dewasa"> 🧔 Dewasa
+                </label>
+            </div>
+            
+            <p><strong>Jumlah Soal:</strong></p>
+            <input type="number" id="limit-input" value="10" min="1" max="20" class="input-number">
+        </div>
+        
+        <button class="start-btn" onclick="startGame()">Mulai Bermain</button>
+        <button class="back-link" onclick="location.reload()">Kembali ke Menu</button>
     </div>
 
     <div id="game-screen" class="hidden">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 15px; color: #666;">
-            <span>Soal: <b id="current-num">1</b>/<span id="total-num">10</span></span>
-            <span>Skor: <b id="score-val" style="color: var(--primary);">0</b></span>
+        <div class="stats">
+            <span>Soal: <span id="current-num">1</span>/<span id="total-num">10</span></span>
+            <span>Skor: <span id="score-val">0</span></span>
         </div>
-        <img id="q-img" src="" class="quiz-img hidden">
-        <h3 id="q-text" style="color: #333; line-height: 1.4;">Memuat pertanyaan...</h3>
+        <div id="image-container" class="hidden">
+            <img id="q-img" src="" class="quiz-img">
+        </div>
+        <h3 id="q-text">Pertanyaan akan muncul di sini?</h3>
         <div id="options-box"></div>
         <div id="result-msg"></div>
     </div>
 
     <div id="end-screen" class="hidden">
-        <h2 style="color: var(--primary);">Masya Allah, Selesai!</h2>
-        <div style="font-size: 1.2rem; margin-bottom: 10px;">Skor Akhir Kamu:</div>
-        <h1 id="final-score" style="font-size: 4.5rem; color: var(--primary); margin: 0;">0</h1>
-        <p id="final-msg" style="margin: 20px 0; font-style: italic;"></p>
-        <button class="menu-btn btn-teks" onclick="location.reload()">Main Lagi</button>
+        <h2 class="finish-title">Alhamdulillah Selesai!</h2>
+        <p>Skor Akhir Kamu:</p>
+        <h1 id="final-score">0</h1>
+        <p id="final-msg"></p>
+        <button class="start-btn" onclick="location.reload()">Main Lagi</button>
     </div>
 </div>
 
 <audio id="snd-right" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
 <audio id="snd-wrong" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio>
 
-<script>
-let currentMode = '';
-let activeQuestions = [];
-let curIdx = 0;
-let score = 0;
-
-// BANK SOAL TEKS (SEJARAH & FIQIH)
-const bankTeks = [
-    // FIQIH
-    {q: "Manakah yang termasuk rukun wudhu?", a: ["Membasuh telinga", "Mencuci tangan", "Niat", "Berkumur"], c: 2},
-    {q: "Berapa nishab emas untuk wajib zakat mal?", a: ["85 gram", "100 gram", "50 gram", "75 gram"], c: 0},
-    {q: "Shalat yang dilakukan untuk meminta hujan disebut...", a: ["Khusuf", "Istisqa", "Istikharah", "Hajat"], c: 1},
-    {q: "Darah yang keluar dari wanita setelah melahirkan disebut...", a: ["Haid", "Istihadhah", "Nifas", "Wiladah"], c: 2},
-    {q: "Syarat sah puasa yang utama adalah...", a: ["Makan sahur", "Niat di malam hari", "Berbuka dengan yang manis", "Shalat Tarawih"], c: 1},
-    {q: "Menyapu debu ke wajah dan tangan sebagai pengganti wudhu disebut...", a: ["Tayamum", "Istinja", "Taharah", "Mandi Wajib"], c: 0},
-    {q: "Hukum mengerjakan shalat jenazah adalah...", a: ["Fardhu Ain", "Fardhu Kifayah", "Sunnah Muakkad", "Mubah"], c: 1},
-    // SEJARAH ISLAM (SKI)
-    {q: "Siapa khalifah yang mengumpulkan Al-Qur'an menjadi satu mushaf?", a: ["Abu Bakar", "Umar bin Khattab", "Utsman bin Affan", "Ali bin Abi Thalib"], c: 2},
-    {q: "Perang yang terjadi karena kaum muslimin menggali parit pertahanan adalah...", a: ["Perang Badar", "Perang Uhud", "Perang Khandaq", "Perang Tabuk"], c: 2},
-    {q: "Siapa panglima perang yang berhasil menaklukkan Konstantinopel?", a: ["Salahuddin Al-Ayyubi", "Muhammad Al-Fatih", "Thariq bin Ziyad", "Khalid bin Walid"], c: 1},
-    {q: "Zaid bin Haritsah adalah satu-satunya sahabat yang...", a: ["Dijamin masuk surga", "Namanya disebut di Al-Qur'an", "Menjadi Khalifah", "Memimpin Perang Badar"], c: 1},
-    {q: "Kota manakah yang pertama kali menjadi tujuan hijrah para sahabat sebelum Madinah?", a: ["Mesir", "Yaman", "Habasyah (Ethiopia)", "Syiria"], c: 2},
-    {q: "Perjanjian damai antara umat Islam dan kaum kafir Quraisy disebut...", a: ["Piagam Madinah", "Perjanjian Hudaibiyah", "Fathul Makkah", "Baiat Aqabah"], c: 1}
-    // ... total bisa ditambahkan hingga 50
-];
-
-// BANK SOAL GAMBAR
-const bankGambar = [
-    {q: "Lihat gambar. Berapa jumlah rakaat shalat fardhu yang wajib dilakukan dalam posisi ini setiap hari?", img: "https://cdn.pixabay.com/photo/2020/03/17/13/23/muslim-4940251_1280.jpg", a: ["15 Rakaat", "17 Rakaat", "20 Rakaat", "10 Rakaat"], c: 1},
-    {q: "Hewan apa yang dikurbankan oleh Nabi Ibrahim AS sebagai pengganti Nabi Ismail AS?", img: "https://cdn.pixabay.com/photo/2017/10/24/18/36/sheep-2885686_1280.jpg", a: ["Sapi", "Kambing/Domba", "Unta", "Kerbau"], c: 1},
-    {q: "Gambar ini menunjukkan situs suci ketiga umat Islam, yaitu...", img: "https://cdn.pixabay.com/photo/2018/11/14/20/06/jerusalem-3815962_1280.jpg", a: ["Masjid Nabawi", "Masjidil Aqsa", "Masjidil Haram", "Masjid Quba"], c: 1},
-    {q: "Kaligrafi di atas biasanya berisi kalimat Tauhid, yaitu...", img: "https://cdn.pixabay.com/photo/2015/09/16/20/08/calligraphy-943310_1280.jpg", a: ["Subhanallah", "Alhamdulillah", "Laa ilaha illallah", "Allahu Akbar"], c: 2},
-    {q: "Bangunan ini dibangun kembali oleh Nabi Ibrahim dan Ismail. Disebut apakah bangunan ini?", img: "https://cdn.pixabay.com/photo/2017/01/29/13/11/kaaba-2017983_1280.jpg", a: ["Maqam Ibrahim", "Ka'bah", "Hijr Ismail", "Hajar Aswad"], c: 1},
-    {q: "Gunung tempat Nabi Muhammad menerima wahyu pertama disebut...", img: "https://cdn.pixabay.com/photo/2019/08/21/05/29/mountain-4420235_1280.jpg", a: ["Jabal Uhud", "Jabal Nur", "Jabal Rahmah", "Jabal Tsur"], c: 1}
-];
-
-function selectMode(m) {
-    currentMode = m;
-    document.getElementById('menu-screen').classList.add('hidden');
-    document.getElementById('setup-screen').classList.remove('hidden');
-    document.getElementById('mode-title').innerText = (m === 'teks') ? "Mode Sejarah & Fiqih" : "Mode Tebak Gambar";
-}
-
-function startGame() {
-    let limit = parseInt(document.getElementById('limit-input').value) || 10;
-    let dataSource = (currentMode === 'teks') ? bankTeks : bankGambar;
-    
-    activeQuestions = [...dataSource].sort(() => Math.random() - 0.5).slice(0, limit);
-    
-    document.getElementById('setup-screen').classList.add('hidden');
-    document.getElementById('game-screen').classList.remove('hidden');
-    document.getElementById('total-num').innerText = activeQuestions.length;
-    
-    loadQuestion();
-}
-
-function loadQuestion() {
-    let q = activeQuestions[curIdx];
-    document.getElementById('current-num').innerText = curIdx + 1;
-    document.getElementById('q-text').innerText = q.q;
-    document.getElementById('result-msg').innerText = "";
-    
-    let imgEl = document.getElementById('q-img');
-    if(currentMode === 'gambar' && q.img) {
-        imgEl.src = q.img;
-        imgEl.classList.remove('hidden');
-    } else {
-        imgEl.classList.add('hidden');
-    }
-
-    let box = document.getElementById('options-box');
-    box.innerHTML = "";
-    q.a.forEach((opt, idx) => {
-        let btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.innerText = opt;
-        btn.onclick = () => checkAnswer(idx);
-        box.appendChild(btn);
-    });
-}
-
-function checkAnswer(idx) {
-    let correct = activeQuestions[curIdx].c;
-    let btns = document.getElementsByClassName('option-btn');
-    for(let b of btns) b.disabled = true;
-
-    if(idx === correct) {
-        score++;
-        document.getElementById('score-val').innerText = score;
-        document.getElementById('result-msg').innerHTML = "<span style='color: var(--secondary)'>✅ MASYA ALLAH, BENAR!</span>";
-        document.getElementById('snd-right').play();
-    } else {
-        document.getElementById('result-msg').innerHTML = "<span style='color: var(--error)'>❌ KURANG TEPAT!</span>";
-        document.getElementById('snd-wrong').play();
-    }
-
-    setTimeout(() => {
-        curIdx++;
-        if(curIdx < activeQuestions.length) loadQuestion();
-        else showFinal();
-    }, 1500);
-}
-
-function showFinal() {
-    document.getElementById('game-screen').classList.add('hidden');
-    document.getElementById('end-screen').classList.remove('hidden');
-    document.getElementById('final-score').innerText = score;
-    
-    let ratio = score / activeQuestions.length;
-    let msg = "";
-    if(ratio === 1) msg = "Barakallah! Pengetahuan sejarah dan fiqihmu luar biasa!";
-    else if(ratio >= 0.7) msg = "Alhamdulillah, hasil yang sangat bagus!";
-    else msg = "Jangan menyerah, ayo terus belajar sejarah Islam!";
-    
-    document.getElementById('final-msg').innerText = msg;
-}
-</script>
+<script src="script.js"></script>
 </body>
 </html>
