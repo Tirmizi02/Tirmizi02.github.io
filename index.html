@@ -8,15 +8,19 @@
 </head>
 <body>
 
+<header class="main-header">
+    <h1>KUIS AGAMA TIRMIZI</h1>
+</header>
+
 <div class="container">
     <div id="menu-screen">
-        <h1 class="header-title">Kuis Agama Tirmizi</h1>
         <p class="subtitle">Silahkan Pilih Kategori:</p>
         <div class="category-grid">
             <button class="cat-btn" onclick="selectCategory('sejarah')">📜 Sejarah</button>
             <button class="cat-btn" onclick="selectCategory('fikih')">⚖️ Fikih</button>
             <button class="cat-btn" onclick="selectCategory('juzamma')">📖 Juz Amma</button>
-            <button class="cat-btn image-mode" onclick="selectCategory('sambungayat')">🎤 Sambung Ayat</button>
+            <button class="cat-btn" onclick="selectCategory('sambungayat')">🎤 Sambung Ayat</button>
+            <button class="cat-btn" onclick="selectCategory('bahasaarab')">🕌 Bahasa Arab</button>
         </div>
     </div>
 
@@ -40,8 +44,7 @@
             <span>Soal: <span id="current-num">1</span>/<span id="total-num">10</span></span>
             <span>Skor: <span id="score-val">0</span></span>
         </div>
-        <h3 id="q-text" style="font-size: 1.5rem; line-height: 2.5rem; direction: rtl; font-family: 'Amiri', serif;">Pertanyaan...</h3>
-        <p id="instruction" style="color: #666; font-style: italic; margin-bottom: 20px;">Lanjutkan potongan ayat di atas:</p>
+        <h3 id="q-text">Pertanyaan...</h3>
         <div id="options-box"></div>
         <div id="result-msg"></div>
     </div>
